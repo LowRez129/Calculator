@@ -1,4 +1,6 @@
 let input = new Array;
+let add_input = new Array;
+let joined_input;
 
 function calculator_buttons() {
     const one = document.querySelector(".button-1");
@@ -18,19 +20,21 @@ function calculator_buttons() {
     });
 }
 
-function Input(x) {
+function Input(value) {
     const screen = document.querySelector(".screen");
-    let joined_input;
 
-    input.push(x);
+    input.push(value);
     joined_input = input.join("");
-    console.log(joined_input);
     screen.textContent = `${joined_input}`;
 }
 
-function add(x) {
-    console.log(x);
+function add() {
+    const button_add = document.querySelector(".button-+");
+    add_input = joined_input;
+}
+
+function operate(input, add) {
+    const button_operate = document.querySelector(".button-=");
 }
 
 calculator_buttons();
-add(5);
