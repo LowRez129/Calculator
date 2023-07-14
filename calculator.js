@@ -20,9 +20,12 @@ function calculator_buttons() {
 
 function Input(x) {
     const screen = document.querySelector(".screen");
+    let joined_input;
+
     input.push(x);
-    console.log(input);
-    screen.textContent = `${input}`;
+    joined_input = input.join("");
+    console.log(joined_input);
+    screen.textContent = `${joined_input}`;
 }
 
 function add(x) {
