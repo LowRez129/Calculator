@@ -1,6 +1,5 @@
 let input = ["0"];
 let add_input = [];
-let joined_input = input;
 let evaluation;
 
 const SCREEN = document.querySelector(".screen");
@@ -38,7 +37,7 @@ function calculator_buttons() {
     button_operate.addEventListener("click", operate);
 
     SCREEN_OPERATIONS.textContent = "- - - - - -";
-    SCREEN.textContent = joined_input;
+    SCREEN.textContent = input;
 }
 
 function Input(value) {
@@ -50,11 +49,11 @@ function Input(value) {
             input.push(value);
     }
    
-    joined_input = input.join("");
-    SCREEN.textContent = `${joined_input}`;
+    SCREEN.textContent = `${input.join("")}`;
 }
 
 function add() {
+    let joined_input = input.join("");
     add_input.push(parseInt(joined_input));
     input = ["0"];
     joined_input = input;
@@ -63,6 +62,7 @@ function add() {
 }
 
 function operate() {
+    let joined_input = input.join("");
     let all = parseInt(joined_input);
     
     add_input.forEach((value) => {
@@ -72,7 +72,6 @@ function operate() {
 
     
     evaluation = all;
-    console.log(input);
     clear();
     SCREEN_OPERATIONS.textContent = "- - - - - -";
     SCREEN.textContent = `= ${all}`;
@@ -82,7 +81,6 @@ function operate() {
 function clear() {
     add_input = [];
     input = ["0"];
-    joined_input = input;
 }
 
 calculator_buttons();
