@@ -37,7 +37,7 @@ function calculator_buttons() {
     button_operate.addEventListener("click", Operate);
 
     SCREEN_OPERATIONS.textContent = " - - - - - - ";
-    SCREEN.textContent = evaluate.input;
+    SCREEN.textContent = JoinInput();
 }
 
 function JoinInput() {
@@ -46,7 +46,7 @@ function JoinInput() {
 
 function Input(value) {
     let parseInt_value = parseInt(value);
-    console.log(parseInt_value);
+    
     switch (evaluate.input[0]) {
         case 0:
             evaluate.input[0] = parseInt_value;
