@@ -40,6 +40,10 @@ function calculator_buttons() {
     SCREEN.textContent = evaluate.input;
 }
 
+function JoinInput() {
+    return evaluate.input.join("");
+}
+
 function Input(value) {
     let parseInt_value = parseInt(value);
     console.log(parseInt_value);
@@ -51,7 +55,7 @@ function Input(value) {
             evaluate.input.push(parseInt_value);
     }
 
-    SCREEN.textContent = evaluate.input.join("");
+    SCREEN.textContent = JoinInput();
 }
 
 function Add() {
