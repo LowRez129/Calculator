@@ -46,7 +46,7 @@ function JoinInput() {
 
 function Input(value) {
     let parseInt_value = parseInt(value);
-    
+
     switch (evaluate.input[0]) {
         case 0:
             evaluate.input[0] = parseInt_value;
@@ -59,7 +59,13 @@ function Input(value) {
 }
 
 function Add() {
+    evaluate.addition.push(JoinInput());
+    let output = evaluate.addition.reduce((previousValue, currentValue) => {
+        previousValue + currentValue
+    }, 0);
 
+    SCREEN_OPERATIONS.textContent = `${evaluate.addition.join(" + ")} = ${output}`;
+    SCREEN.textContent = `${Clear()}`;
 }
 
 function Subtract() {
@@ -68,6 +74,10 @@ function Subtract() {
 
 function Operate() {
 
+}
+
+function Clear() {
+    return evaluate.input = [0];
 }
 
 calculator_buttons();
