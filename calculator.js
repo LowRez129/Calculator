@@ -41,7 +41,7 @@ function calculator_buttons() {
 }
 
 function JoinInput() {
-    return evaluate.input.join("");
+    return parseInt(evaluate.input.join(""));
 }
 
 function Input(value) {
@@ -60,8 +60,9 @@ function Input(value) {
 
 function Add() {
     evaluate.addition.push(JoinInput());
-    let output = evaluate.addition.reduce((previousValue, currentValue) => {
-        previousValue + currentValue
+    let output = evaluate.addition.reduce((previousValue, currentValue) => { 
+            console.log(previousValue + currentValue);
+            return previousValue + currentValue 
     }, 0);
 
     SCREEN_OPERATIONS.textContent = `${evaluate.addition.join(" + ")} = ${output}`;
@@ -69,7 +70,14 @@ function Add() {
 }
 
 function Subtract() {
+    evaluate.subtraction.push(JoinInput());
+    let output = evaluate.subtraction.reduce((previousValue, currentValue) => { 
+            console.log(previousValue - currentValue);
+            return previousValue - currentValue 
+    });
 
+    SCREEN_OPERATIONS.textContent = `${evaluate.subtraction.join(" - ")} = ${output}`;
+    SCREEN.textContent = `${Clear()}`;
 }
 
 function Operate() {
