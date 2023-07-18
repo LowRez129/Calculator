@@ -5,6 +5,7 @@ let evaluate = {
 }
 
 let tempo = 0;
+let check = false;
 
 const SCREEN = document.querySelector(".screen");
 const SCREEN_OPERATIONS = document.querySelector(".screen-operations");
@@ -50,6 +51,10 @@ function storeOutput(value) {
     tempo = value;
 }
 
+function Check(value) {
+
+}
+
 function Clear(option) {
     switch (option) {
         case "reset":
@@ -85,6 +90,8 @@ function Add() {
             return previousValue + currentValue 
     });
 
+    storeOutput(output);
+
     SCREEN_OPERATIONS.textContent = `${evaluate.addition.join(" + ")} = ${output}`;
     SCREEN.textContent = `${Clear("reset")}`;
 }
@@ -95,6 +102,8 @@ function Subtract() {
             console.log(previousValue - currentValue);
             return previousValue - currentValue 
     });
+
+    storeOutput(output);
 
     SCREEN_OPERATIONS.textContent = `${evaluate.subtraction.join(" - ")} = ${output}`;
     SCREEN.textContent = `${Clear("reset")}`;
