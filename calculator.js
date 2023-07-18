@@ -4,9 +4,6 @@ let evaluate = {
     subtraction: [],
 }
 
-const SCREEN = document.querySelector(".screen");
-const SCREEN_OPERATIONS = document.querySelector(".screen-operations");
-
 function calculator_buttons() {
     const zero = document.querySelector(".button-0");
     const one = document.querySelector(".button-1");
@@ -36,9 +33,17 @@ function calculator_buttons() {
     button_subtract.addEventListener("click", Subtract);
     button_operate.addEventListener("click", Operate);
 
-    SCREEN_OPERATIONS.textContent = " - - - - - - ";
-    SCREEN.textContent = JoinInput();
+    screenFunction(undefined, JoinInput());
 }
+
+function screenFunction(topscreen = "- - - - - -", bottomscreen) {
+    const SCREEN_OPERATIONS = document.querySelector(".screen-operations");
+    const SCREEN = document.querySelector(".screen");
+
+    SCREEN_OPERATIONS.textContent = topscreen;
+    SCREEN.textContent = bottomscreen;
+}
+
 
 function JoinInput() {
     return parseInt(evaluate.input.join(""));
@@ -61,6 +66,7 @@ function Clear(option) {
 
 function Input(value) {
     let parseInt_value = parseInt(value);
+    let SCREEN = document.querySelector(".screen");
 
     switch (evaluate.input[0]) {
         case 0:
@@ -79,8 +85,9 @@ function Add() {
             return previousValue + currentValue 
     });
 
-    SCREEN_OPERATIONS.textContent = `${evaluate.addition.join(" + ")} = ${output}`;
-    SCREEN.textContent = `${Clear("reset")}`;
+    let addition_array = evaluate.addition.join(" + ");
+
+    screenFunction(`${addition_array} = ${output}`, `${Clear("reset")}`);
 }
 
 function Subtract() {
@@ -89,8 +96,9 @@ function Subtract() {
             return previousValue - currentValue 
     });
 
-    SCREEN_OPERATIONS.textContent = `${evaluate.subtraction.join(" - ")} = ${output}`;
-    SCREEN.textContent = `${Clear("reset")}`;
+    let subtraction_array = evaluate.subtraction.join(" - ")
+
+    screenFunction(`${subtraction_array} = ${output}`, `${Clear("reset")}`);
 }
 
 function Operate() {
