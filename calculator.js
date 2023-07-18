@@ -4,9 +4,6 @@ let evaluate = {
     subtraction: [],
 }
 
-let tempo = 0;
-let check = false;
-
 const SCREEN = document.querySelector(".screen");
 const SCREEN_OPERATIONS = document.querySelector(".screen-operations");
 
@@ -45,14 +42,6 @@ function calculator_buttons() {
 
 function JoinInput() {
     return parseInt(evaluate.input.join(""));
-}
-
-function storeOutput(value) {
-    tempo = value;
-}
-
-function Check(value) {
-
 }
 
 function Clear(option) {
@@ -99,7 +88,6 @@ function Add() {
 function Subtract() {
     evaluate.subtraction.push(JoinInput());
     let output = evaluate.subtraction.reduce((previousValue, currentValue) => { 
-            console.log(previousValue - currentValue);
             return previousValue - currentValue 
     });
 
