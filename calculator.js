@@ -4,6 +4,8 @@ let evaluate = {
     subtraction: [],
 }
 
+let tempo = 0;
+
 const SCREEN = document.querySelector(".screen");
 const SCREEN_OPERATIONS = document.querySelector(".screen-operations");
 
@@ -44,6 +46,25 @@ function JoinInput() {
     return parseInt(evaluate.input.join(""));
 }
 
+function storeOutput(value) {
+    tempo = value;
+}
+
+function Clear(option) {
+    switch (option) {
+        case "reset":
+            return evaluate.input = [0];
+
+        default:
+            return evaluate = {
+                input: [0],
+                addition: [],
+                subtraction: [],
+            };
+    }
+}
+
+
 function Input(value) {
     let parseInt_value = parseInt(value);
 
@@ -61,12 +82,11 @@ function Input(value) {
 function Add() {
     evaluate.addition.push(JoinInput());
     let output = evaluate.addition.reduce((previousValue, currentValue) => { 
-            console.log(previousValue + currentValue);
             return previousValue + currentValue 
-    }, 0);
+    });
 
     SCREEN_OPERATIONS.textContent = `${evaluate.addition.join(" + ")} = ${output}`;
-    SCREEN.textContent = `${Clear()}`;
+    SCREEN.textContent = `${Clear("reset")}`;
 }
 
 function Subtract() {
@@ -77,15 +97,11 @@ function Subtract() {
     });
 
     SCREEN_OPERATIONS.textContent = `${evaluate.subtraction.join(" - ")} = ${output}`;
-    SCREEN.textContent = `${Clear()}`;
+    SCREEN.textContent = `${Clear("reset")}`;
 }
 
 function Operate() {
 
-}
-
-function Clear() {
-    return evaluate.input = [0];
 }
 
 calculator_buttons();
