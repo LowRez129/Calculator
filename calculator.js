@@ -79,8 +79,6 @@ function Add() {
             return previousValue + currentValue 
     });
 
-    storeOutput(output);
-
     SCREEN_OPERATIONS.textContent = `${evaluate.addition.join(" + ")} = ${output}`;
     SCREEN.textContent = `${Clear("reset")}`;
 }
@@ -90,8 +88,6 @@ function Subtract() {
     let output = evaluate.subtraction.reduce((previousValue, currentValue) => { 
             return previousValue - currentValue 
     });
-
-    storeOutput(output);
 
     SCREEN_OPERATIONS.textContent = `${evaluate.subtraction.join(" - ")} = ${output}`;
     SCREEN.textContent = `${Clear("reset")}`;
