@@ -1,8 +1,13 @@
 let evaluate = {
     input: [0],
-    addition: [],
     subtraction: [],
 }
+
+let previousArray = [];
+let currentArray = [];
+
+let previousValue = 0;
+let currentValue = 0;
 
 function calculator_buttons() {
     const zero = document.querySelector(".button-0");
@@ -34,6 +39,11 @@ function calculator_buttons() {
     button_operate.addEventListener("click", Operate);
 
     screenFunction(undefined, JoinInput());
+    let t1 = [0, 5].join(" + ");
+    let t2 = [t1, 2, 3].join(" - ");
+    let t3 = [t2, 10].join(" * ");
+
+    //screenFunction(t3, undefined);
 }
 
 function screenFunction(topscreen = "- - - - - -", bottomscreen) {
@@ -57,7 +67,7 @@ function Clear(option) {
         default:
             return evaluate = {
                 input: [0],
-                addition: [],
+                previousArray: [],
                 subtraction: [],
             };
     }
@@ -80,12 +90,18 @@ function Input(value) {
 }
 
 function Add() {
-    evaluate.addition.push(JoinInput());
-    let output = evaluate.addition.reduce((previousValue, currentValue) => { 
-            return previousValue + currentValue 
-    });
+    if (previousArray != []) {
+        currentArray.push(previousArray);
+    }
+    
+    currentValue = JoinInput();
+    currentArray.push(currentValue);
+    
+    let output = previousValue + currentValue;
+    previousValue = output;
+    console.log(output);
 
-    let addition_array = evaluate.addition.join(" + ");
+    let addition_array = currentArray.join(" + ");
 
     screenFunction(`${addition_array} = ${output}`, `${Clear("reset")}`);
 }
