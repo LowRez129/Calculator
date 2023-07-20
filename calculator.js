@@ -1,7 +1,4 @@
-let evaluate = {
-    input: [0],
-    subtraction: [],
-}
+let input = [0];
 
 let previousArray = [];
 let currentArray = [];
@@ -56,20 +53,17 @@ function screenFunction(topscreen = "- - - - - -", bottomscreen) {
 
 
 function JoinInput() {
-    return parseInt(evaluate.input.join(""));
+    return parseInt(input.join(""));
 }
 
 function Clear(option) {
     switch (option) {
         case "reset":
-            return evaluate.input = [0];
+            return input = [0];
 
         default:
-            return evaluate = {
-                input: [0],
-                previousArray: [],
-                subtraction: [],
-            };
+
+                
     }
 }
 
@@ -78,23 +72,23 @@ function Input(value) {
     let parseInt_value = parseInt(value);
     let SCREEN = document.querySelector(".screen");
 
-    switch (evaluate.input[0]) {
+    switch (input[0]) {
         case 0:
-            evaluate.input[0] = parseInt_value;
+            input[0] = parseInt_value;
             break;
         default:
-            evaluate.input.push(parseInt_value);
+            input.push(parseInt_value);
     }
 
     SCREEN.textContent = JoinInput();
 }
 
 function Add() {
-    
+
     currentValue = JoinInput();
     currentArray.push(currentValue);
     
-    let output = currentValue + previousValue;
+    let output = previousValue + currentValue;
     previousValue = output;
 
     let addition_array = currentArray.join(" + ");
@@ -104,12 +98,14 @@ function Add() {
 }
 
 function Subtract() {
-    evaluate.subtraction.push(JoinInput());
-    let output = evaluate.subtraction.reduce((previousValue, currentValue) => { 
-            return previousValue - currentValue 
-    });
+    currentValue = JoinInput();
+    currentArray.push(currentValue);
 
-    let subtraction_array = evaluate.subtraction.join(" - ")
+    let output = previousValue - currentValue;
+    previousValue = output;
+
+    let subtraction_array = currentArray.join(" - ");
+    previousArray = currentArray;
 
     screenFunction(`${subtraction_array} = ${output}`, `${Clear("reset")}`);
 }
