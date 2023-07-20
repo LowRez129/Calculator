@@ -90,18 +90,15 @@ function Input(value) {
 }
 
 function Add() {
-    if (previousArray != []) {
-        currentArray.push(previousArray);
-    }
     
     currentValue = JoinInput();
     currentArray.push(currentValue);
     
-    let output = previousValue + currentValue;
+    let output = currentValue + previousValue;
     previousValue = output;
-    console.log(output);
 
     let addition_array = currentArray.join(" + ");
+    previousArray = currentArray;
 
     screenFunction(`${addition_array} = ${output}`, `${Clear("reset")}`);
 }
