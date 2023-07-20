@@ -111,7 +111,7 @@ function Subtract() {
 }
 
 function Operate() {
-
+    screenFunction(currentArray, previousValue);
 }
 
 calculator_buttons();
