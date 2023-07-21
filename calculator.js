@@ -22,6 +22,7 @@ function calculator_buttons() {
     const button_multiply = document.querySelector(".button-multiply")
     const button_divide = document.querySelector(".button-divide");
     const button_operate = document.querySelector(".button-operate");
+    const button_clear = document.querySelector(".button-clear");
 
     zero.addEventListener("click", () => Input(zero.value))
     one.addEventListener("click", () => Input(one.value));   
@@ -34,13 +35,12 @@ function calculator_buttons() {
     eight.addEventListener("click", () => Input(eight.value));
     nine.addEventListener("click", () => Input(nine.value));
 
-    
-
     button_add.addEventListener("click", Add);
     button_subtract.addEventListener("click", Subtract);
     button_multiply.addEventListener("click", Multiply);
     button_divide.addEventListener("click", Divide);
     button_operate.addEventListener("click", Operate);
+    button_clear.addEventListener("click", () => Clear("history"));
 
     screenFunction(undefined, JoinInput());
 }
@@ -58,10 +58,18 @@ function JoinInput() {
     return parseInt(input.join(""));
 }
 
-function Clear() {
-    input = [0];
-    currentArray = [];
-    evaluateArray = [];        
+function Clear(value) {
+    switch(value) {
+        case "history":
+            previousArray = [];
+            screenFunction(undefined, 0);
+            break;
+        default:
+            input = [0];
+            currentArray = [];
+            evaluateArray = []; 
+    }
+           
 }
 
 function checkArray() {
