@@ -1,10 +1,9 @@
 let input = [0];
+let output_total = 0;
 
 let previousArray = [];
 let currentArray = [];
-
-let previousValue = 0;
-let currentValue = 0;
+let evaluateArray = [];
 
 function calculator_buttons() {
     const zero = document.querySelector(".button-0");
@@ -63,6 +62,7 @@ function Clear(option) {
 
         default:
             currentArray = [];
+            evaluateArray = [];
                 
     }
 }
@@ -84,11 +84,13 @@ function Input(value) {
 }
 
 function Add() {
-    currentValue = JoinInput();
-    currentArray.push(previousArray, currentValue);
+    currentArray.push(previousArray, JoinInput());
+    evaluateArray.push(output_total, JoinInput());
     
-    let output = previousValue + currentValue;
-    previousValue = output;
+    let output = evaluateArray.reduce((previous, current) => {
+        return previous + current;
+    });
+    output_total = output;
 
     let addition_array = currentArray.join(" + ");
     previousArray = addition_array;
@@ -98,11 +100,13 @@ function Add() {
 }
 
 function Subtract() {
-    currentValue = JoinInput();
-    currentArray.push(previousArray, currentValue);
+    currentArray.push(previousArray, JoinInput());
+    evaluateArray.push(output_total, JoinInput());
 
-    let output = previousValue - currentValue;
-    previousValue = output;
+    let output = evaluateArray.reduce((previous, current) => {
+        return previous - current;
+    });
+    output_total = output;
 
     let subtraction_array = currentArray.join(" - ");
     previousArray = subtraction_array;
@@ -112,7 +116,8 @@ function Subtract() {
 }
 
 function Operate() {
-    screenFunction(currentArray, previousValue);
+    screenFunction(previousArray, output_total);
+    console.log(previousArray);
 }
 
 calculator_buttons();
