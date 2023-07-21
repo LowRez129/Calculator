@@ -62,7 +62,7 @@ function Clear(option) {
             return input = [0];
 
         default:
-
+            currentArray = [];
                 
     }
 }
@@ -84,30 +84,31 @@ function Input(value) {
 }
 
 function Add() {
-
     currentValue = JoinInput();
-    currentArray.push(currentValue);
+    currentArray.push(previousArray, currentValue);
     
     let output = previousValue + currentValue;
     previousValue = output;
 
     let addition_array = currentArray.join(" + ");
-    previousArray = currentArray;
+    previousArray = addition_array;
 
     screenFunction(`${addition_array} = ${output}`, `${Clear("reset")}`);
+    Clear();
 }
 
 function Subtract() {
     currentValue = JoinInput();
-    currentArray.push(currentValue);
+    currentArray.push(previousArray, currentValue);
 
     let output = previousValue - currentValue;
     previousValue = output;
 
     let subtraction_array = currentArray.join(" - ");
-    previousArray = currentArray;
+    previousArray = subtraction_array;
 
     screenFunction(`${subtraction_array} = ${output}`, `${Clear("reset")}`);
+    Clear();
 }
 
 function Operate() {
