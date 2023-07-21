@@ -10,36 +10,39 @@ function calculator_buttons() {
     const one = document.querySelector(".button-1");
     const two = document.querySelector(".button-2");
     const three = document.querySelector(".button-3");
+    const four = document.querySelector(".button-4");
+    const five = document.querySelector(".button-5");
+    const six = document.querySelector(".button-6");
+    const seven = document.querySelector(".button-7");
+    const eight = document.querySelector(".button-8");
+    const nine = document.querySelector(".button-9");
+    
     const button_add = document.querySelector(".button-add");
     const button_subtract = document.querySelector(".button-subtract");
+    const button_multiply = document.querySelector(".button-multiply")
+    const button_divide = document.querySelector(".button-divide");
     const button_operate = document.querySelector(".button-operate");
 
-    zero.addEventListener("click", () => {
-        Input(zero.value);
-    });
+    zero.addEventListener("click", () => Input(zero.value))
+    one.addEventListener("click", () => Input(one.value));   
+    two.addEventListener("click", () => Input(two.value));
+    three.addEventListener("click", () => Input(three.value));
+    four.addEventListener("click", () => Input(four.value));
+    five.addEventListener("click", () => Input(five.value));
+    six.addEventListener("click", () => Input(six.value));
+    seven.addEventListener("click", () => Input(seven.value));
+    eight.addEventListener("click", () => Input(eight.value));
+    nine.addEventListener("click", () => Input(nine.value));
 
-    one.addEventListener("click", () => {
-        Input(one.value);
-    });
     
-    two.addEventListener("click", () => {
-        Input(two.value);
-    });
-
-    three.addEventListener("click", () => {
-        Input(three.value);
-    });
 
     button_add.addEventListener("click", Add);
     button_subtract.addEventListener("click", Subtract);
+    button_multiply.addEventListener("click", Multiply);
+    button_divide.addEventListener("click", Divide);
     button_operate.addEventListener("click", Operate);
 
     screenFunction(undefined, JoinInput());
-    let t1 = [0, 5].join(" + ");
-    let t2 = [t1, 2, 3].join(" - ");
-    let t3 = [t2, 10].join(" * ");
-
-    //screenFunction(t3, undefined);
 }
 
 function screenFunction(topscreen = "- - - - - -", bottomscreen) {
@@ -67,6 +70,18 @@ function Clear(option) {
     }
 }
 
+function checkArray() {
+    switch (previousArray.length) {
+        case 0:
+            currentArray.push(JoinInput());
+            evaluateArray.push(JoinInput());
+            break;
+        default:
+            currentArray.push(previousArray, JoinInput());
+            evaluateArray.push(output_total, JoinInput());
+    }
+}
+
 
 function Input(value) {
     let parseInt_value = parseInt(value);
@@ -84,8 +99,7 @@ function Input(value) {
 }
 
 function Add() {
-    currentArray.push(previousArray, JoinInput());
-    evaluateArray.push(output_total, JoinInput());
+    checkArray();
     
     let output = evaluateArray.reduce((previous, current) => {
         return previous + current;
@@ -100,8 +114,7 @@ function Add() {
 }
 
 function Subtract() {
-    currentArray.push(previousArray, JoinInput());
-    evaluateArray.push(output_total, JoinInput());
+    checkArray();
 
     let output = evaluateArray.reduce((previous, current) => {
         return previous - current;
@@ -115,9 +128,39 @@ function Subtract() {
     Clear();
 }
 
+function Multiply() {
+    checkArray();
+
+    let output = evaluateArray.reduce((previous, current) => {
+        return previous * current;
+    });
+    output_total = output;
+
+    let subtraction_array = currentArray.join(" × ");
+    previousArray = subtraction_array;
+
+    screenFunction(`${subtraction_array} = ${output}`, `${Clear("reset")}`);
+    Clear();
+}
+
+function Divide() {
+    checkArray();
+
+    let output = evaluateArray.reduce((previous, current) => {
+        return previous / current;
+    });
+    output_total = output;
+
+    let subtraction_array = currentArray.join(" ÷ ");
+    previousArray = subtraction_array;
+
+    screenFunction(`${subtraction_array} = ${output}`, `${Clear("reset")}`);
+    Clear();
+}
+
 function Operate() {
-    screenFunction(previousArray, output_total);
-    console.log(previousArray);
+    screenFunction(output_total, Clear("reset"));
+    Clear();
 }
 
 calculator_buttons();
