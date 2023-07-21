@@ -58,16 +58,10 @@ function JoinInput() {
     return parseInt(input.join(""));
 }
 
-function Clear(option) {
-    switch (option) {
-        case "reset":
-            return input = [0];
-
-        default:
-            currentArray = [];
-            evaluateArray = [];
-                
-    }
+function Clear() {
+    input = [0];
+    currentArray = [];
+    evaluateArray = [];        
 }
 
 function checkArray() {
@@ -109,7 +103,7 @@ function Add() {
     let addition_array = currentArray.join(" + ");
     previousArray = addition_array;
 
-    screenFunction(`${addition_array} = ${output}`, `${Clear("reset")}`);
+    screenFunction(`${addition_array} = ${output}`, 0);
     Clear();
 }
 
@@ -124,7 +118,7 @@ function Subtract() {
     let subtraction_array = currentArray.join(" - ");
     previousArray = subtraction_array;
 
-    screenFunction(`${subtraction_array} = ${output}`, `${Clear("reset")}`);
+    screenFunction(`${subtraction_array} = ${output}`, 0);
     Clear();
 }
 
@@ -139,7 +133,7 @@ function Multiply() {
     let subtraction_array = currentArray.join(" × ");
     previousArray = subtraction_array;
 
-    screenFunction(`${subtraction_array} = ${output}`, `${Clear("reset")}`);
+    screenFunction(`${subtraction_array} = ${output}`, 0);
     Clear();
 }
 
@@ -154,12 +148,12 @@ function Divide() {
     let subtraction_array = currentArray.join(" ÷ ");
     previousArray = subtraction_array;
 
-    screenFunction(`${subtraction_array} = ${output}`, `${Clear("reset")}`);
+    screenFunction(`${subtraction_array} = ${output}`, 0);
     Clear();
 }
 
 function Operate() {
-    screenFunction(output_total, Clear("reset"));
+    screenFunction(output_total, 0);
     Clear();
 }
 
