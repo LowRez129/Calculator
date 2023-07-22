@@ -62,7 +62,10 @@ function JoinInput() {
 function Clear(value) {
     switch(value) {
         case "history":
+            input = [0];
             previousArray = [];
+            currentArray = [];
+            evaluateArray = [];
             screenFunction(undefined, 0);
             break;
         default:
