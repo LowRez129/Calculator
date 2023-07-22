@@ -1,5 +1,6 @@
 let input = [0];
 let output_total = 0;
+let current_state = "";
 
 let previousArray = [];
 let currentArray = [];
@@ -67,12 +68,20 @@ function Clear(value) {
         default:
             input = [0];
             currentArray = [];
-            evaluateArray = []; 
+            evaluateArray = [];
     }
            
 }
 
-function checkArray() {
+function checkArray(state) {
+    switch (input[0]) {
+        case 0:
+            current_state = "";
+            break;
+        default:
+            current_state = state;
+    }
+
     switch (previousArray.length) {
         case 0:
             currentArray.push(JoinInput());
@@ -98,10 +107,21 @@ function Input(value) {
     }
 
     SCREEN.textContent = JoinInput();
+    switch (current_state) {
+        case "add":
+            Add();
+            break;
+        
+        case "subtract":
+            Subtract();
+            break;
+    }
+
+    current_state = "";
 }
 
 function Add() {
-    checkArray();
+    checkArray("add");
     
     let output = evaluateArray.reduce((previous, current) => {
         return previous + current;
@@ -116,7 +136,7 @@ function Add() {
 }
 
 function Subtract() {
-    checkArray();
+    checkArray("subtract");
 
     let output = evaluateArray.reduce((previous, current) => {
         return previous - current;
