@@ -149,6 +149,10 @@ function Multiply() {
 
 function Divide() {
     checkArray();
+    if (evaluateArray[1] == 0) {
+        Clear();
+        return screenFunction(previousArray, "Can't divide in zero");
+    }
 
     let output = evaluateArray.reduce((previous, current) => {
         return previous / current;
