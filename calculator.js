@@ -4,6 +4,8 @@ let previousState = "";
 let currentState = "";
 let sameState = true;
 
+let arrayswitch = false;
+
 let previousValue;
 let currentValue;
 let previousArray = [];
@@ -104,12 +106,21 @@ function checkValues() {
     switch (previousValue) {
         case undefined:
             previousValue = JoinInput();
-            currentArray.push(JoinInput());
+            currentArray.push(JoinInput(), undefined);
+            arrayswitch = true;
             return "undefined";
         default:
-            currentValue = JoinInput();
-            currentArray.push(previousArray, currentValue);
-            //return "defined";
+            switch (arrayswitch) {
+                case true:
+                    currentValue = JoinInput();
+                    previousArray = previousValue;
+                    currentArray.push(previousArray, currentValue);
+                    arrayswitch = false;
+                    break;
+                default:
+                    currentValue = JoinInput();
+                    currentArray.push(previousArray, currentValue);
+            }
     }
 }
 
