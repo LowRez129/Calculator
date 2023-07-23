@@ -8,7 +8,6 @@ let previousValue;
 let currentValue;
 let previousArray = [];
 let currentArray = [];
-let evaluateArray = [];
 
 function calculator_buttons() {
     const zero = document.querySelector(".button-0");
@@ -67,15 +66,15 @@ function Clear(value) {
     switch(value) {
         case "history":
             input = [0];
+            previousValue = undefined;
+            currentValue = undefined;
             previousArray = [];
             currentArray = [];
-            evaluateArray = [];
             screenFunction(undefined, 0);
             break;
         default:
             input = [0];
             currentArray = [];
-            evaluateArray = [];
     }
            
 }
@@ -119,7 +118,6 @@ function operateState() {
         case "add":
             Add();
             break;
-        
 
         case "subtract":
             Subtract();
