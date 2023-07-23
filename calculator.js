@@ -114,13 +114,10 @@ function checkValues() {
 function Add() {
     checkValues();
 
-    let output = previousValue + currentValue;
-    previousValue = output;
+    previousValue += currentValue;
+    previousArray = currentArray.join(" + ");
 
-    let addition_array = currentArray.join(" + ");
-    previousArray = addition_array;
-
-    screenFunction(`${addition_array} = ${output}`, 0);
+    screenFunction(`${previousArray} = ${previousValue}`, 0);
     Clear();
 }
 
