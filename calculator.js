@@ -77,18 +77,6 @@ function Clear(value) {
            
 }
 
-function checkArray() {
-    switch (previousArray.length) {
-        case 0:
-            currentArray.push(JoinInput());
-            evaluateArray.push(JoinInput());
-            break;
-        default:
-            currentArray.push(previousArray, JoinInput());
-            evaluateArray.push(output_total, JoinInput());
-    }
-}
-
 function Input(value) {
     let parseInt_value = parseInt(value);
     let SCREEN = document.querySelector(".screen");
@@ -104,13 +92,22 @@ function Input(value) {
     SCREEN.textContent = JoinInput();
 }
 
+function checkValues() {
+    switch (previousValue) {
+        case undefined:
+            previousValue = JoinInput();
+            currentValue = 0;
+            break;
+        default:
+            currentValue = JoinInput();
+    }
+}
+
 function Add() {
-    checkArray();
-    
-    let output = evaluateArray.reduce((previous, current) => {
-        return previous + current;
-    });
-    output_total = output;
+    checkValues();
+
+    let output = previousValue + currentValue;
+    previousValue = output;
 
     let addition_array = currentArray.join(" + ");
     previousArray = addition_array;
@@ -120,15 +117,7 @@ function Add() {
 }
 
 function Subtract() {
-    //checkArray();
-    console.log(previousValue);
-    if (previousValue == undefined) {
-        previousValue = JoinInput();
-        currentValue = 0;
-    }
-    else {
-        currentValue = JoinInput();
-    }
+    checkValues();
 
     let output = previousValue - currentValue;
     previousValue = output;
@@ -141,7 +130,7 @@ function Subtract() {
 }
 
 function Multiply() {
-    checkArray();
+    //checkArray();
 
     let output = evaluateArray.reduce((previous, current) => {
         return previous * current;
@@ -156,7 +145,7 @@ function Multiply() {
 }
 
 function Divide() {
-    checkArray();
+    //checkArray();
     if (evaluateArray[1] == 0) {
         Clear();
         return screenFunction(previousArray, "Can't divide in zero");
