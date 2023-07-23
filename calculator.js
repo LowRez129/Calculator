@@ -97,6 +97,10 @@ function Input(value) {
         default:
             screenFunction(previousArray, JoinInput());
     }
+    if (inState == true) {
+        Add();
+        inState = false;
+    }
 }
 
 function checkValues() {
@@ -113,6 +117,7 @@ function checkValues() {
 }
 
 function Add() {
+    inState = true;
     checkValues();
 
     previousValue += currentValue;
