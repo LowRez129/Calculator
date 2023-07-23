@@ -1,6 +1,8 @@
 let input = [0];
 let output_total = 0;
 
+let previousValue;
+let currentValue;
 let previousArray = [];
 let currentArray = [];
 let evaluateArray = [];
@@ -118,12 +120,18 @@ function Add() {
 }
 
 function Subtract() {
-    checkArray();
+    //checkArray();
+    console.log(previousValue);
+    if (previousValue == undefined) {
+        previousValue = JoinInput();
+        currentValue = 0;
+    }
+    else {
+        currentValue = JoinInput();
+    }
 
-    let output = evaluateArray.reduce((previous, current) => {
-        return previous - current;
-    });
-    output_total = output;
+    let output = previousValue - currentValue;
+    previousValue = output;
 
     let subtraction_array = currentArray.join(" - ");
     previousArray = subtraction_array;
