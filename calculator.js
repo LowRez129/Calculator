@@ -104,12 +104,12 @@ function checkValues() {
     switch (previousValue) {
         case undefined:
             previousValue = JoinInput();
-            currentValue = 0;
             currentArray.push(JoinInput());
-            break;
+            return "undefined";
         default:
             currentValue = JoinInput();
             currentArray.push(previousArray, currentValue);
+            //return "defined";
     }
 }
 
@@ -126,11 +126,13 @@ function operateState() {
 }
 
 function Add() {
-    checkValues();
-    operateState();
-    currentState = "add";
+    if (checkValues() != "undefined") {
+        previousValue += currentValue;
+    }
 
-    previousValue += currentValue;
+    operateState();
+
+    currentState = "add";
     previousArray = currentArray.join(" + ");
 
     screenFunction(`${previousArray} = ${previousValue}`, 0);
@@ -138,9 +140,10 @@ function Add() {
 }
 
 function Subtract() {
-    checkValues();
+    if (checkValues() != "undefined") {
+        previousValue -= currentValue;
+    }
 
-    previousValue -= currentValue;
     previousArray = currentArray.join(" - ");
 
     screenFunction(`${previousArray} = ${previousValue}`, 0);
@@ -148,9 +151,10 @@ function Subtract() {
 }
 
 function Multiply() {
-    checkValues();
-
-    previousValue = previousValue * currentValue;
+    if (checkValues() != "undefined") {
+        previousValue *= currentValue;
+    }
+   
     previousArray = currentArray.join(" × ");
 
     screenFunction(`${previousArray} = ${previousValue}`, 0);
@@ -158,13 +162,16 @@ function Multiply() {
 }
 
 function Divide() {
-    checkValues();
-    if (currentValue == 0) {
-        Clear();
-        return screenFunction(previousArray, "Can't divide in zero");
+    if (checkValues() != "undefined") {
+        switch (currentValue) {
+            case 0:
+                Clear();
+                return screenFunction(previousArray, "Can't divide in zero");
+            default:
+                previousValue /= currentValue;
+        }
     }
 
-    previousValue /= currentValue;
     previousArray = currentArray.join(" ÷ ");
 
     screenFunction(`${previousArray} = ${previousValue}`, 0);
