@@ -1,6 +1,8 @@
 let input = [0];
 let output_total = 0;
-let inState = false;
+let previousState = "";
+let currentState = "";
+let sameState = true;
 
 let previousValue;
 let currentValue;
@@ -97,10 +99,6 @@ function Input(value) {
         default:
             screenFunction(previousArray, JoinInput());
     }
-    if (inState == true) {
-        Add();
-        inState = false;
-    }
 }
 
 function checkValues() {
@@ -116,9 +114,23 @@ function checkValues() {
     }
 }
 
+function operateState() {
+    switch (previousState) {
+        case "add":
+            Add();
+            break;
+        
+
+        case "subtract":
+            Subtract();
+            break;
+    }
+}
+
 function Add() {
-    inState = true;
     checkValues();
+    operateState();
+    currentState = "add";
 
     previousValue += currentValue;
     previousArray = currentArray.join(" + ");
@@ -130,52 +142,39 @@ function Add() {
 function Subtract() {
     checkValues();
 
-    let output = previousValue - currentValue;
-    previousValue = output;
+    previousValue -= currentValue;
+    previousArray = currentArray.join(" - ");
 
-    let subtraction_array = currentArray.join(" - ");
-    previousArray = subtraction_array;
-
-    screenFunction(`${subtraction_array} = ${output}`, 0);
+    screenFunction(`${previousArray} = ${previousValue}`, 0);
     Clear();
 }
 
 function Multiply() {
-    //checkArray();
+    checkValues();
 
-    let output = evaluateArray.reduce((previous, current) => {
-        return previous * current;
-    });
-    output_total = output;
+    previousValue = previousValue * currentValue;
+    previousArray = currentArray.join(" × ");
 
-    let subtraction_array = currentArray.join(" × ");
-    previousArray = subtraction_array;
-
-    screenFunction(`${subtraction_array} = ${output}`, 0);
+    screenFunction(`${previousArray} = ${previousValue}`, 0);
     Clear();
 }
 
 function Divide() {
-    //checkArray();
-    if (evaluateArray[1] == 0) {
+    checkValues();
+    if (currentValue == 0) {
         Clear();
         return screenFunction(previousArray, "Can't divide in zero");
     }
 
-    let output = evaluateArray.reduce((previous, current) => {
-        return previous / current;
-    });
-    output_total = output;
+    previousValue /= currentValue;
+    previousArray = currentArray.join(" ÷ ");
 
-    let subtraction_array = currentArray.join(" ÷ ");
-    previousArray = subtraction_array;
-
-    screenFunction(`${subtraction_array} = ${output}`, 0);
+    screenFunction(`${previousArray} = ${previousValue}`, 0);
     Clear();
 }
 
 function Operate() {
-    screenFunction(output_total, 0);
+    screenFunction(previousValue, 0);
     Clear();
 }
 
