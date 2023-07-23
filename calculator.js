@@ -1,5 +1,6 @@
 let input = [0];
 let output_total = 0;
+let inState = false;
 
 let previousValue;
 let currentValue;
