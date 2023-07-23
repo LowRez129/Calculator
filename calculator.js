@@ -89,7 +89,13 @@ function Input(value) {
             input.push(parseInt_value);
     }
 
-    SCREEN.textContent = JoinInput();
+    switch (previousValue) {
+        case undefined:
+            SCREEN.textContent = JoinInput();
+            break;
+        default:
+            screenFunction(previousArray, JoinInput());
+    }
 }
 
 function checkValues() {
@@ -97,9 +103,11 @@ function checkValues() {
         case undefined:
             previousValue = JoinInput();
             currentValue = 0;
+            currentArray.push(JoinInput());
             break;
         default:
             currentValue = JoinInput();
+            currentArray.push(previousArray, currentValue);
     }
 }
 
