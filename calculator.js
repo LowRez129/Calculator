@@ -101,11 +101,11 @@ function checkValues() {
     switch (previousValue) {
         case undefined:
             previousValue = JoinInput();
-            currentArray.push(JoinInput());
+            currentArray.push(JoinInput(), undefined);
             return "undefined";
         default:
             currentValue = JoinInput();
-            currentArray.push(previousArray, currentValue);
+            currentArray.push(currentValue, undefined);
     }
 }
 
@@ -114,10 +114,9 @@ function Add() {
         previousValue += currentValue;
     }
 
-    currentState = "add";
-    previousArray = currentArray.join(" + ");
+    previousArray.push(currentArray.join(" + "));
 
-    screenFunction(`${previousArray} = ${previousValue}`, 0);
+    screenFunction(`${previousArray.join("")} = ${previousValue}`, 0);
     Clear();
 }
 
