@@ -125,9 +125,9 @@ function Subtract() {
         previousValue -= currentValue;
     }
 
-    previousArray = currentArray.join(" - ");
+    previousArray.push(currentArray.join(" - "));
 
-    screenFunction(`${previousArray} = ${previousValue}`, 0);
+    screenFunction(`${previousArray.join("")} = ${previousValue}`, 0);
     Clear();
 }
 
