@@ -1,10 +1,5 @@
 let input = [0];
 let output_total = 0;
-let previousState = "";
-let currentState = "";
-let sameState = true;
-
-let arrayswitch = false;
 
 let previousValue;
 let currentValue;
@@ -106,33 +101,11 @@ function checkValues() {
     switch (previousValue) {
         case undefined:
             previousValue = JoinInput();
-            currentArray.push(JoinInput(), undefined);
-            arrayswitch = true;
+            currentArray.push(JoinInput());
             return "undefined";
         default:
-            switch (arrayswitch) {
-                case true:
-                    currentValue = JoinInput();
-                    previousArray = previousValue;
-                    currentArray.push(previousArray, currentValue);
-                    arrayswitch = false;
-                    break;
-                default:
-                    currentValue = JoinInput();
-                    currentArray.push(previousArray, currentValue);
-            }
-    }
-}
-
-function operateState() {
-    switch (previousState) {
-        case "add":
-            Add();
-            break;
-
-        case "subtract":
-            Subtract();
-            break;
+            currentValue = JoinInput();
+            currentArray.push(previousArray, currentValue);
     }
 }
 
@@ -140,8 +113,6 @@ function Add() {
     if (checkValues() != "undefined") {
         previousValue += currentValue;
     }
-
-    operateState();
 
     currentState = "add";
     previousArray = currentArray.join(" + ");
