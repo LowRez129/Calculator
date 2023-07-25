@@ -1,4 +1,36 @@
-.button-container {
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    background-color: green;
+    padding: 16px;
+}
+
+.screen-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: yellow;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: yellowgreen;
+}
+
+.number-container {
     display: grid;
     grid-template-columns: auto auto auto;
 }
+
+.operations-container {
+    display: grid;
+}
+
