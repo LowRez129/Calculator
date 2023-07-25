@@ -42,8 +42,7 @@ function calculator_buttons() {
         currentState = "add";
         checkValues();
         checkState();
-        previousArray.push(currentArray.join(" + "));
-        screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+        checkArray();
         Clear();
         previousState = currentState;
     });
@@ -51,8 +50,7 @@ function calculator_buttons() {
         currentState = "subtract";
         checkValues();
         checkState();
-        previousArray.push(currentArray.join(" - "));
-        screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+        checkArray();
         Clear();
         previousState = currentState;
     });
@@ -60,8 +58,7 @@ function calculator_buttons() {
         currentState = "multiply";
         checkValues();
         checkState();
-        previousArray.push(currentArray.join(" × "));
-        screenFunction(`${previousArray.join("")} `, `= ${previousValue}`);
+        checkArray();
         Clear();
         previousState = currentState;
     });
@@ -69,8 +66,7 @@ function calculator_buttons() {
         currentState = "divide";
         checkValues();
         checkState();
-        previousArray.push(currentArray.join(" ÷ "));
-        screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+        checkArray();
         Clear();
         previousState = currentState;
     });
@@ -162,6 +158,30 @@ function checkState() {
     }
 }
 
+function checkArray() {
+    switch (currentState) {
+        case "add":
+            previousArray.push(currentArray.join(" + "));
+            screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+            break;
+
+        case "subtract":
+            previousArray.push(currentArray.join(" - "));
+            screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+            break;
+        
+        case "multiply":
+            previousArray.push(currentArray.join(" × "));
+            screenFunction(`${previousArray.join("")} `, `= ${previousValue}`);
+            break;
+
+        case "divide":
+            previousArray.push(currentArray.join(" ÷ "));
+            screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+            break;
+    }
+}
+
 function Add() {
     if (currentValue != undefined) {
         previousValue += currentValue;
@@ -195,8 +215,10 @@ function Divide() {
 function Operate() {
     checkValues();
     checkState();
-    screenFunction(previousValue, 0);
+    checkArray();
+    screenFunction(undefined, `= ${previousValue}`);
     Clear();
+    previousState = currentState;
 }
 
 calculator_buttons();
