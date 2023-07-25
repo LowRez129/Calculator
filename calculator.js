@@ -1,6 +1,9 @@
 let input = [0];
 let output_total = 0;
 
+let previousState;
+let currentState;
+
 let previousValue;
 let currentValue;
 let previousArray = [];
@@ -36,8 +39,18 @@ function calculator_buttons() {
     eight.addEventListener("click", () => Input(eight.value));
     nine.addEventListener("click", () => Input(nine.value));
 
-    button_add.addEventListener("click", Add);
-    button_subtract.addEventListener("click", Subtract);
+    button_add.addEventListener("click", () =>{
+        currentState = "add";
+        //checkState();
+        Add();
+        previousState = currentState;
+    });
+    button_subtract.addEventListener("click", () =>{
+        currentState = "subtract";
+        //checkState();
+        Subtract();
+        previousState = currentState;
+    });
     button_multiply.addEventListener("click", Multiply);
     button_divide.addEventListener("click", Divide);
     button_operate.addEventListener("click", Operate);
@@ -102,15 +115,33 @@ function checkValues() {
         case undefined:
             previousValue = JoinInput();
             currentArray.push(JoinInput(), undefined);
-            return "undefined";
+            break;
         default:
             currentValue = JoinInput();
             currentArray.push(currentValue, undefined);
     }
 }
 
+function checkState() {
+    if (previousState == undefined) {
+        previousState = currentState;
+    }
+    switch (currentState) {
+        case previousState:
+            return;
+
+        case "add":
+            return Add();
+
+        case "subtract":
+            return Subtract();
+
+    }
+}
+
 function Add() {
-    if (checkValues() != "undefined") {
+    checkValues();
+    if (currentValue != undefined) {
         previousValue += currentValue;
     }
 
@@ -121,7 +152,8 @@ function Add() {
 }
 
 function Subtract() {
-    if (checkValues() != "undefined") {
+    checkState();
+    if (currentValue != undefined) {
         previousValue -= currentValue;
     }
 
