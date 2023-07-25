@@ -1,5 +1,4 @@
 let input = [0];
-let output_total = 0;
 
 let previousState;
 let currentState;
@@ -41,18 +40,40 @@ function calculator_buttons() {
 
     button_add.addEventListener("click", () =>{
         currentState = "add";
-        //checkState();
-        Add();
+        checkValues();
+        checkState();
+        previousArray.push(currentArray.join(" + "));
+        screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+        Clear();
         previousState = currentState;
     });
     button_subtract.addEventListener("click", () =>{
         currentState = "subtract";
-        //checkState();
-        Subtract();
+        checkValues();
+        checkState();
+        previousArray.push(currentArray.join(" - "));
+        screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+        Clear();
         previousState = currentState;
     });
-    button_multiply.addEventListener("click", Multiply);
-    button_divide.addEventListener("click", Divide);
+    button_multiply.addEventListener("click", () =>{
+        currentState = "multiply";
+        checkValues();
+        checkState();
+        previousArray.push(currentArray.join(" × "));
+        screenFunction(`${previousArray.join("")} `, `= ${previousValue}`);
+        Clear();
+        previousState = currentState;
+    });
+    button_divide.addEventListener("click", () =>{
+        currentState = "divide";
+        checkValues();
+        checkState();
+        previousArray.push(currentArray.join(" ÷ "));
+        screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+        Clear();
+        previousState = currentState;
+    });
     button_operate.addEventListener("click", Operate);
     button_clear.addEventListener("click", () => Clear("history"));
 
@@ -106,7 +127,7 @@ function Input(value) {
             SCREEN.textContent = JoinInput();
             break;
         default:
-            screenFunction(previousArray, JoinInput());
+            screenFunction(previousArray.join(""), JoinInput());
     }
 }
 
@@ -126,56 +147,41 @@ function checkState() {
     if (previousState == undefined) {
         previousState = currentState;
     }
-    switch (currentState) {
-        case previousState:
-            return;
-
+    switch (previousState) {
         case "add":
             return Add();
 
         case "subtract":
             return Subtract();
+        
+        case "multiply":
+            return Multiply();
 
+        case "divide":
+            return Divide();
     }
 }
 
 function Add() {
-    checkValues();
     if (currentValue != undefined) {
         previousValue += currentValue;
     }
-
-    previousArray.push(currentArray.join(" + "));
-
-    screenFunction(`${previousArray.join("")} = ${previousValue}`, 0);
-    Clear();
 }
 
 function Subtract() {
-    checkState();
     if (currentValue != undefined) {
         previousValue -= currentValue;
     }
-
-    previousArray.push(currentArray.join(" - "));
-
-    screenFunction(`${previousArray.join("")} = ${previousValue}`, 0);
-    Clear();
 }
 
 function Multiply() {
-    if (checkValues() != "undefined") {
+    if (currentValue != undefined) {
         previousValue *= currentValue;
     }
-   
-    previousArray = currentArray.join(" × ");
-
-    screenFunction(`${previousArray} = ${previousValue}`, 0);
-    Clear();
 }
 
 function Divide() {
-    if (checkValues() != "undefined") {
+    if (currentState != undefined) {
         switch (currentValue) {
             case 0:
                 Clear();
@@ -184,14 +190,11 @@ function Divide() {
                 previousValue /= currentValue;
         }
     }
-
-    previousArray = currentArray.join(" ÷ ");
-
-    screenFunction(`${previousArray} = ${previousValue}`, 0);
-    Clear();
 }
 
 function Operate() {
+    checkValues();
+    checkState();
     screenFunction(previousValue, 0);
     Clear();
 }
