@@ -208,7 +208,8 @@ function Divide() {
         switch (currentValue) {
             case 0:
                 Clear();
-                return screenFunction(numberArray, "Can't divide in zero");
+                screenFunction(numberArray, "Can't divide in zero");
+                break;
             default:
                 previousValue /= currentValue;
         }
