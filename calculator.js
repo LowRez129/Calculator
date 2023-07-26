@@ -19,6 +19,7 @@ function calculator_buttons() {
     const seven = document.querySelector(".button-7");
     const eight = document.querySelector(".button-8");
     const nine = document.querySelector(".button-9");
+    const point = document.querySelector(".button-point")
     
     const button_add = document.querySelector(".button-add");
     const button_subtract = document.querySelector(".button-subtract");
@@ -37,6 +38,7 @@ function calculator_buttons() {
     seven.addEventListener("click", () => Input(seven.value));
     eight.addEventListener("click", () => Input(eight.value));
     nine.addEventListener("click", () => Input(nine.value));
+    point.addEventListener("click", () => Input(undefined));
 
     button_add.addEventListener("click", () =>{
         currentState = "add";
@@ -105,8 +107,12 @@ function Clear(value) {
 }
 
 function Input(value) {
+    if (value == undefined) {
+        let parse_float = parseFloat(input.join("")).toFixed(2);
+        return screenFunction(parse_float, "=");
+    }
+
     let parseInt_value = parseInt(value);
-    let SCREEN = document.querySelector(".screen");
 
     switch (input[0]) {
         case 0:
