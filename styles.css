@@ -4,6 +4,12 @@ body {
     margin: 0;
 }
 
+#title-container {
+    display: flex;
+    justify-content: center;
+    background-color: yellowgreen;
+}
+
 #calculator-container {
     display: flex;
     background-color: yellow;
