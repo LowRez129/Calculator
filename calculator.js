@@ -73,7 +73,7 @@ function calculator_buttons() {
     button_operate.addEventListener("click", Operate);
     button_clear.addEventListener("click", () => Clear("history"));
 
-    screenFunction(undefined, JoinInput());
+    screenFunction(undefined, "=");
 }
 
 function screenFunction(topscreen = "- - - - - -", bottomscreen) {
@@ -118,10 +118,10 @@ function Input(value) {
 
     switch (previousValue) {
         case undefined:
-            SCREEN.textContent = JoinInput();
+            screenFunction(JoinInput(), "=")
             break;
         default:
-            screenFunction(numberArray.join(""), JoinInput());
+            screenFunction(`${numberArray.join("")}${JoinInput()}`, `= ${previousValue}`);
     }
 }
 

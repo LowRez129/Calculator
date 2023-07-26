@@ -4,6 +4,11 @@ body {
     margin: 0;
 }
 
+#calculator-container {
+    display: flex;
+    background-color: yellow;
+}
+
 .calculator {
     display: flex;
     flex-direction: column;
@@ -23,6 +28,7 @@ body {
     flex-direction: row;
     justify-content: center;
     background-color: yellowgreen;
+    padding: 8px;
 }
 
 .number-container {
