@@ -177,7 +177,12 @@ function checkArray() {
             numberArray.push(" ÷ ");
             screenFunction(`${numberArray.join("")}`, `= ${previousValue}`);
             break;
-    }
+
+        case "operate":
+            numberArray.push(" = ");
+            screenFunction(`${numberArray.join("")}`, `= ${previousValue}`);
+            break;
+    } 
 }
 
 function Add() {
@@ -211,6 +216,7 @@ function Divide() {
 }
 
 function Operate() {
+    currentState = "operate";
     checkValues();
     checkState();
     checkArray();
