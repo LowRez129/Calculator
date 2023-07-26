@@ -9,14 +9,12 @@ body {
     display: flex;
     justify-content: center;
     background-color: yellowgreen;
-    flex-grow: 1;
 }
 
 #calculator-container {
     display: flex;
     background-color: yellow;
     justify-content: center;
-    flex-grow: 1;
 }
 
 .calculator {
