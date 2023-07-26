@@ -5,7 +5,7 @@ let currentState;
 
 let previousValue;
 let currentValue;
-let previousArray = [];
+let numberArray = [];
 let currentArray = [];
 
 function calculator_buttons() {
@@ -95,13 +95,11 @@ function Clear(value) {
             input = [0];
             previousValue = undefined;
             currentValue = undefined;
-            previousArray = [];
-            currentArray = [];
+            numberArray = [];
             screenFunction(undefined, 0);
             break;
         default:
             input = [0];
-            currentArray = [];
     }
            
 }
@@ -123,7 +121,7 @@ function Input(value) {
             SCREEN.textContent = JoinInput();
             break;
         default:
-            screenFunction(previousArray.join(""), JoinInput());
+            screenFunction(numberArray.join(""), JoinInput());
     }
 }
 
@@ -131,11 +129,11 @@ function checkValues() {
     switch (previousValue) {
         case undefined:
             previousValue = JoinInput();
-            currentArray.push(JoinInput(), undefined);
+            numberArray.push(JoinInput());
             break;
         default:
             currentValue = JoinInput();
-            currentArray.push(currentValue, undefined);
+            numberArray.push(currentValue);
     }
 }
 
@@ -161,23 +159,23 @@ function checkState() {
 function checkArray() {
     switch (currentState) {
         case "add":
-            previousArray.push(currentArray.join(" + "));
-            screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+            numberArray.push(" + ");
+            screenFunction(`${numberArray.join("")}`, `= ${previousValue}`);
             break;
 
         case "subtract":
-            previousArray.push(currentArray.join(" - "));
-            screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+            numberArray.push(" - ");
+            screenFunction(`${numberArray.join("")}`, `= ${previousValue}`);
             break;
         
         case "multiply":
-            previousArray.push(currentArray.join(" × "));
-            screenFunction(`${previousArray.join("")} `, `= ${previousValue}`);
+            numberArray.push(" × ");
+            screenFunction(`${numberArray.join("")} `, `= ${previousValue}`);
             break;
 
         case "divide":
-            previousArray.push(currentArray.join(" ÷ "));
-            screenFunction(`${previousArray.join("")}`, `= ${previousValue}`);
+            numberArray.push(" ÷ ");
+            screenFunction(`${numberArray.join("")}`, `= ${previousValue}`);
             break;
     }
 }
@@ -205,7 +203,7 @@ function Divide() {
         switch (currentValue) {
             case 0:
                 Clear();
-                return screenFunction(previousArray, "Can't divide in zero");
+                return screenFunction(numberArray, "Can't divide in zero");
             default:
                 previousValue /= currentValue;
         }
