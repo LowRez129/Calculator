@@ -121,7 +121,7 @@ function Input(value) {
             screenFunction(JoinInput(), "=")
             break;
         default:
-            screenFunction(`${numberArray.join("")}${JoinInput()}`, `= ${previousValue}`);
+            screenFunction(`${numberArray.join("")}${JoinInput()}`, "=");
     }
 }
 
