@@ -99,10 +99,13 @@ function Clear(value) {
             previousValue = undefined;
             currentValue = undefined;
             numberArray = [];
+            decimal_point = false;
             screenFunction(undefined, 0);
             break;
         default:
             input = [0];
+            decimal_point = false;
+
     }
            
 }
