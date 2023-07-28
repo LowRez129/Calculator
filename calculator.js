@@ -39,7 +39,7 @@ function calculator_buttons() {
     seven.addEventListener("click", () => Input(7));
     eight.addEventListener("click", () => Input(8));
     nine.addEventListener("click", () => Input(9));
-    point.addEventListener("click", () => Input(true));
+    point.addEventListener("click", () => Input("."));
 
     button_add.addEventListener("click", () =>{
         currentState = "add";
@@ -138,7 +138,7 @@ function Input(value) {
         default:
             screenFunction(`${numberArray.join("")}${JoinInput()}`, "=");
     }
-    console.log(JoinInput());
+    console.log(JoinInput(), decimal_point);
 }
 
 function checkValues() {
