@@ -1,4 +1,5 @@
-let input = [0];
+let input = [0.0];
+let decimal_point = false;
 
 let previousState;
 let currentState;
@@ -28,17 +29,17 @@ function calculator_buttons() {
     const button_operate = document.querySelector(".button-operate");
     const button_clear = document.querySelector(".button-clear");
 
-    zero.addEventListener("click", () => Input(zero.value))
-    one.addEventListener("click", () => Input(one.value));   
-    two.addEventListener("click", () => Input(two.value));
-    three.addEventListener("click", () => Input(three.value));
-    four.addEventListener("click", () => Input(four.value));
-    five.addEventListener("click", () => Input(five.value));
-    six.addEventListener("click", () => Input(six.value));
-    seven.addEventListener("click", () => Input(seven.value));
-    eight.addEventListener("click", () => Input(eight.value));
-    nine.addEventListener("click", () => Input(nine.value));
-    point.addEventListener("click", () => Input(undefined));
+    zero.addEventListener("click", () => Input(0))
+    one.addEventListener("click", () => Input(1));   
+    two.addEventListener("click", () => Input(2));
+    three.addEventListener("click", () => Input(3));
+    four.addEventListener("click", () => Input(4));
+    five.addEventListener("click", () => Input(5));
+    six.addEventListener("click", () => Input(6));
+    seven.addEventListener("click", () => Input(7));
+    eight.addEventListener("click", () => Input(8));
+    nine.addEventListener("click", () => Input(9));
+    point.addEventListener("click", () => Input(true));
 
     button_add.addEventListener("click", () =>{
         currentState = "add";
@@ -88,7 +89,7 @@ function screenFunction(topscreen = "- - - - - -", bottomscreen) {
 
 
 function JoinInput() {
-    return parseInt(input.join(""));
+    return parseFloat(input.join(""));
 }
 
 function Clear(value) {
@@ -107,19 +108,27 @@ function Clear(value) {
 }
 
 function Input(value) {
-    if (value == undefined) {
-        let parse_float = parseFloat(input.join("")).toFixed(2);
-        return screenFunction(parse_float, "=");
-    }
-
-    let parseInt_value = parseInt(value);
-
-    switch (input[0]) {
-        case 0:
-            input[0] = parseInt_value;
+    switch (value) {
+        case ".":
+            switch (decimal_point) {
+                case false:
+                    input.push(".");
+                    decimal_point = true;
+                    break;
+                case true:
+                    screenFunction(`${numberArray.join("")}${JoinInput()}`, "Decimal point already added.");
+                    break;
+            }
             break;
+
         default:
-            input.push(parseInt_value);
+            switch (input[0]) {
+                case 0:
+                    input[0] = value; //parseInt_value;
+                    break;
+                default:
+                    input.push(value); //(parseInt_value);
+            }
     }
 
     switch (previousValue) {
@@ -129,6 +138,7 @@ function Input(value) {
         default:
             screenFunction(`${numberArray.join("")}${JoinInput()}`, "=");
     }
+    console.log(JoinInput());
 }
 
 function checkValues() {
@@ -185,7 +195,7 @@ function checkArray() {
             break;
 
         case "operate":
-            numberArray.push(" = ");
+            //numberArray.push(" = ");
             screenFunction(`${numberArray.join("")}`, `= ${previousValue}`);
             break;
     } 
@@ -229,7 +239,12 @@ function Operate() {
     checkArray();
     screenFunction(undefined, `= ${previousValue}`);
     Clear();
+    previousValue =
     previousState = currentState;
 }
 
 calculator_buttons();
+let test = [1.2];
+//test.push(.2);
+test = parseFloat(test.join(""));
+console.log(test);
