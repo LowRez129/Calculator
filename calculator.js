@@ -208,7 +208,7 @@ function checkArray() {
             break;
 
         case "operate":
-            numberArray.push(" = ");
+            numberArray.push(` = ${previousValue}`);
             screenFunction(`${numberArray.join("")}`, `= ${previousValue}`);
             break;
     } 
