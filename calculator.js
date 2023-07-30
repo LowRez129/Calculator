@@ -198,7 +198,7 @@ function checkArray() {
             break;
 
         case "operate":
-            //numberArray.push(" = ");
+            numberArray.push(" = ");
             screenFunction(`${numberArray.join("")}`, `= ${previousValue}`);
             break;
     } 
@@ -241,8 +241,7 @@ function Operate() {
     checkState();
     checkArray();
     screenFunction(undefined, `= ${previousValue}`);
-    Clear();
-    previousValue =
+    //Clear();
     previousState = currentState;
 }
 
