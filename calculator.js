@@ -73,7 +73,14 @@ function calculator_buttons() {
         Clear();
         previousState = currentState;
     });
-    button_operate.addEventListener("click", Operate);
+    button_operate.addEventListener("click", () => {
+        currentState = "operate";
+        checkValues();
+        checkState();
+        checkArray();
+        Clear();
+        previousState = currentState;
+    });
     button_clear.addEventListener("click", () => Clear("history"));
 
     screenFunction(undefined, "=");
@@ -172,6 +179,9 @@ function checkState() {
 
         case "divide":
             return Divide();
+
+        case "operate":
+            return Operate();
     }
 }
 
@@ -236,13 +246,11 @@ function Divide() {
 }
 
 function Operate() {
-    currentState = "operate";
-    checkValues();
-    checkState();
-    checkArray();
-    screenFunction(undefined, `= ${previousValue}`);
-    //Clear();
-    previousState = currentState;
+    if (previousValue == currentValue) {
+        if (currentValue != undefined) {
+            previousValue = currentValue;
+        }
+    }
 }
 
 calculator_buttons();
