@@ -233,15 +233,8 @@ function Multiply() {
 }
 
 function Divide() {
-    if (currentState != undefined) {
-        switch (currentValue) {
-            case 0:
-                Clear();
-                screenFunction(numberArray, "Can't divide in zero");
-                break;
-            default:
-                previousValue /= currentValue;
-        }
+    if (currentValue != undefined) {
+        previousValue /= currentValue;
     }
 }
 
